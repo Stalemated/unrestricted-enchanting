@@ -1,9 +1,9 @@
 {
     "unrestr_ench.config_screen.title": "Unrestricted Enchanting",
-    "unrestr_ench.config_screen.category.allowed": "Allowed Compatibilities",
-    "unrestr_ench.config_screen.category.restricted": "Restricted Compatibilities",
-    "unrestr_ench.config_screen.op_required": "\n§4§lWarning:§r §cYou must be a server operator to edit this.§r",
+    "unrestr_ench.config_screen.category.allowed": "Compatibilidades Permitidas",
+    "unrestr_ench.config_screen.category.restricted": "Compatibilidades Restringidas",
+    "unrestr_ench.config_screen.op_required": "\n§4§lAdvertencia:§r §cDebes ser un operador del servidor para editar esto.§r",
 
-    "unrestr_ench.config_screen.allowed.description": "Forces these enchantments to be compatible with the parent enchantment.",
-    "unrestr_ench.config_screen.restricted.description": "Forces these enchantments to be incompatible, taking precedence over Vanilla and Allowed lists."
+    "unrestr_ench.config_screen.allowed.description": "Fuerza a que los siguientes IDs de encantamientos §7(ej. §6minecraft:sharpness§7)§f sean §acompatibles§f con el encantamiento seleccionado.",
+    "unrestr_ench.config_screen.restricted.description": "Fuerza a que los siguientes IDs de encantamientos §7(ej. §6minecraft:sharpness§7)§f sean §cincompatibles§f con el encantamiento seleccionado, teniendo prioridad sobre las §6listas de compatibilidades por defecto y permitidas§f."
 }
