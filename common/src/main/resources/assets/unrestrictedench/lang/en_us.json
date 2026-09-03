@@ -1,0 +1,9 @@
+{
+    "unrestr_ench.config_screen.title": "Unrestricted Enchanting",
+    "unrestr_ench.config_screen.category.allowed": "Allowed Compatibilities",
+    "unrestr_ench.config_screen.category.restricted": "Restricted Compatibilities",
+    "unrestr_ench.config_screen.op_required": "\n§4§lWarning:§r §cYou must be a server operator to edit this.§r",
+
+    "unrestr_ench.config_screen.allowed.description": "Forces these enchantments to be compatible with the parent enchantment.",
+    "unrestr_ench.config_screen.restricted.description": "Forces these enchantments to be incompatible, taking precedence over Vanilla and Allowed lists."
+}

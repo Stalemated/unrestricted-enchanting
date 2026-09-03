@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "unrestricted_enchanting",
+  "version": "${version}",
+  "name": "Unrestricted Enchanting",
+  "description": "A tool that allows you to fully customize enchantment compatibilities!",
+  "authors": [
+    "Stalemated"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/unrestricted-enchanting",
+    "sources": "https://github.com/Stalemated/unrestricted-enchanting",
+    "issues": "https://github.com/Stalemated/unrestricted-enchanting/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/unrestricted_enchanting/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.stalemated.unrestrictedench.fabric.UnrestrictedEnchantingFabric"
+    ],
+    "client": [
+      "com.stalemated.unrestrictedench.fabric.client.UnrestrictedEnchantingFabricClient"
+    ],
+    "modmenu": [
+      "com.stalemated.unrestrictedench.fabric.compat.modmenu.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "unrestricted_enchanting.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": "*",
+    "s_lib": ">=2.1.0+1.20.1",
+    "yet_another_config_lib_v3": ">=3.6.6"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
