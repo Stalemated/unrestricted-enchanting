@@ -36,7 +36,6 @@ public class UEConfigScreen {
                         sortedIds,
                         rules -> rules.restricted,
                         (rules, val) -> rules.restricted = new ArrayList<>(val)))
-                .save(ConfigManager.MANAGER::saveFromClient)
                 .build()
                 .generateScreen(parent);
     }
@@ -73,16 +72,24 @@ public class UEConfigScreen {
                 .binding(
                         new ArrayList<>(),
                         () -> {
-                            Map<String, EnchantmentRules> rulesMap = ConfigManager.MANAGER.getActiveConfig().rules;
+                            Map<String, EnchantmentRules> rulesMap = ConfigManager.getActiveConfig().rules;
                             if (rulesMap != null && rulesMap.containsKey(key)) {
                                 return getter.apply(rulesMap.get(key));
                             }
                             return new ArrayList<>();
                         },
-                        val -> ConfigManager.MANAGER.updateField((cfg, v) -> {
-                            if (cfg.rules == null) cfg.rules = new java.util.TreeMap<>();
-                            setter.accept(cfg.rules.computeIfAbsent(key, k -> new EnchantmentRules()), v);
-                        }, val, ClientConfigPermissions.OP_OR_SP)
+                        val -> {
+                            Map<String, EnchantmentRules> currentRules = ConfigManager.getActiveConfig().rules;
+                            Map<String, EnchantmentRules> newRules = new TreeMap<>();
+                            if (currentRules != null) {
+                                for (Map.Entry<String, EnchantmentRules> entry : currentRules.entrySet()) {
+                                    newRules.put(entry.getKey(), new EnchantmentRules(entry.getValue()));
+                                }
+                            }
+                            EnchantmentRules entryRules = newRules.computeIfAbsent(key, k -> new EnchantmentRules());
+                            setter.accept(entryRules, val);
+                            ConfigManager.MANAGER.updateOption("rules", newRules);
+                        }
                 )
                 .controller(StringControllerBuilder::create)
                 .initial("")

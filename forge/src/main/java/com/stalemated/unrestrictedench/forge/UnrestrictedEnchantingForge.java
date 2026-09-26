@@ -1,10 +1,8 @@
 package com.stalemated.unrestrictedench.forge;
 
 import com.stalemated.unrestrictedench.config.ConfigManager;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -19,18 +17,12 @@ import com.stalemated.unrestrictedench.forge.client.UnrestrictedEnchantingForgeC
 public final class UnrestrictedEnchantingForge {
     public UnrestrictedEnchantingForge() {
         UnrestrictedEnchanting.init();
-        MinecraftForge.EVENT_BUS.addListener(this::onPlayerJoin);
+
         MinecraftForge.EVENT_BUS.addListener(this::onServerStarting);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onLoadComplete);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
             UnrestrictedEnchantingForgeClient.init();
-        }
-    }
-
-    private void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayerEntity serverPlayer) {
-            ConfigManager.MANAGER.sendConfigToPlayer(serverPlayer);
         }
     }
 

@@ -1,6 +1,6 @@
 package com.stalemated.unrestrictedench.enchantment;
 
-import com.stalemated.unrestrictedench.config.ConfigManager;
+import com.stalemated.unrestrictedench.config.UEConfig;
 import com.stalemated.unrestrictedench.model.EnchantmentRules;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.registry.Registries;
@@ -33,8 +33,8 @@ public class EnchantCompatCache {
         return setA != null && setA.contains(idB);
     }
 
-    public static void rebuild() {
-        Map<String, EnchantmentRules> rulesMap = ConfigManager.MANAGER.getActiveConfig().rules;
+    public static void rebuild(UEConfig config) {
+        Map<String, EnchantmentRules> rulesMap = config.rules;
         allowedGraph.clear();
         restrictedGraph.clear();
 
