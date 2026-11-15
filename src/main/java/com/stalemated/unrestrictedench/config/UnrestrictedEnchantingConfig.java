@@ -4,7 +4,6 @@ import com.stalemated.lib.config.annotation.Comment;
 import com.stalemated.lib.config.annotation.Nest;
 import com.stalemated.lib.config.annotation.Sync;
 import com.stalemated.lib.config.network.SyncMode;
-import com.stalemated.unrestrictedench.model.EnchantmentRules;
 
 import java.util.Map;
 import java.util.TreeMap;

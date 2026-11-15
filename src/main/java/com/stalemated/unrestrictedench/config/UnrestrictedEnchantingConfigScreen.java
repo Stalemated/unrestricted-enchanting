@@ -5,7 +5,6 @@ import com.stalemated.lib.compat.yacl.builder.YaclScreenBuilder;
 import com.stalemated.lib.config.ConfigManager;
 import com.stalemated.unrestrictedench.UnrestrictedEnchanting;
 import com.stalemated.unrestrictedench.enchantment.EnchantmentIds;
-import com.stalemated.unrestrictedench.model.EnchantmentRules;
 import net.minecraft.Util;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;

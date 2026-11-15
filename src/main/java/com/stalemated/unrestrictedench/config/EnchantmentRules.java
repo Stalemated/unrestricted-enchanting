@@ -1,4 +1,4 @@
-package com.stalemated.unrestrictedench.model;
+package com.stalemated.unrestrictedench.config;
 
 import java.util.ArrayList;
 import java.util.List;
