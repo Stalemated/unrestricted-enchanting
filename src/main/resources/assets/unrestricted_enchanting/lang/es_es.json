@@ -1,0 +1,7 @@
+{
+    "unrestricted_enchanting.config.title": "Unrestricted Enchanting",
+    "unrestricted_enchanting.category.allowed": "Compatibilidades Permitidas",
+    "unrestricted_enchanting.category.restricted": "Compatibilidades Restringidas",
+    "unrestricted_enchanting.option.allowed.desc": "Fuerza a que los siguientes IDs de encantamientos §7(ej. §6minecraft:sharpness§7)§f sean §acompatibles§f con el encantamiento seleccionado.",
+    "unrestricted_enchanting.option.restricted.desc": "Fuerza a que los siguientes IDs de encantamientos §7(ej. §6minecraft:sharpness§7)§f sean §cincompatibles§f con el encantamiento seleccionado, teniendo prioridad sobre las §6listas de compatibilidades por defecto y permitidas§f."
+}

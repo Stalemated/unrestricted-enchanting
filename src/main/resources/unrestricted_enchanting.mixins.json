@@ -4,7 +4,7 @@
     "compatibilityLevel": "${mixin_compatibility}",
     "minVersion": "0.8",
     "mixins": [
-        "MinecraftServerMixin"
+        "EnchantmentMixin"
     ],
     "client": [
     ],
