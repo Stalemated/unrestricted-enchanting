@@ -1,6 +1,8 @@
 package com.stalemated.unrestrictedench;
 
 import com.stalemated.unrestrictedench.config.UnrestrictedEnchantingConfigRegistry;
+import com.stalemated.unrestrictedench.enchantment.EnchantmentIds;
+import net.minecraft.server.MinecraftServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +20,8 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 *///?} elif neoforge {
 /*import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
 *///?}
 
 //? if forge || neoforge {
@@ -33,7 +37,7 @@ implements ModInitializer
     @Override
     public void onInitialize() {
         init();
-        ServerLifecycleEvents.SERVER_STARTING.register(server -> UnrestrictedEnchantingConfigRegistry.addRegisteredEnchantments());
+        ServerLifecycleEvents.SERVER_STARTING.register(UnrestrictedEnchanting::addRegisteredEnchantments);
     }
     //?} elif forge {
     /*@SuppressWarnings("removal")
@@ -46,6 +50,7 @@ implements ModInitializer
     *///?} elif neoforge {
     /*public UnrestrictedEnchanting(Dist dist) {
         init();
+        NeoForge.EVENT_BUS.addListener(UnrestrictedEnchanting::onServerStarting);
         if (dist == Dist.CLIENT) UnrestrictedEnchantingClient.init();
     }
     *///?}
@@ -54,13 +59,19 @@ implements ModInitializer
         UnrestrictedEnchantingConfigRegistry.register();
     }
 
-    //? if forge {
-    /*private static void onServerStarting(ServerStartingEvent event) {
-        UnrestrictedEnchantingConfigRegistry.addRegisteredEnchantments();
+    private static void addRegisteredEnchantments(MinecraftServer server) {
+        UnrestrictedEnchantingConfigRegistry.addRegisteredEnchantments(EnchantmentIds.registeredIn(server.registryAccess()));
     }
 
-    private static void onLoadComplete(FMLLoadCompleteEvent event) {
-        event.enqueueWork(UnrestrictedEnchantingConfigRegistry::addRegisteredEnchantments);
+    //? if forge || neoforge {
+    /*private static void onServerStarting(ServerStartingEvent event) {
+        addRegisteredEnchantments(event.getServer());
+    }
+    *///?}
+
+    //? if forge {
+    /*private static void onLoadComplete(FMLLoadCompleteEvent event) {
+        event.enqueueWork(() -> UnrestrictedEnchantingConfigRegistry.addRegisteredEnchantments(EnchantmentIds.builtIn()));
     }
     *///?}
 }

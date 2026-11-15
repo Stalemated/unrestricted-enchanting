@@ -4,10 +4,10 @@ import com.stalemated.lib.compat.yacl.builder.NestListBinding;
 import com.stalemated.lib.compat.yacl.builder.YaclScreenBuilder;
 import com.stalemated.lib.config.ConfigManager;
 import com.stalemated.unrestrictedench.UnrestrictedEnchanting;
+import com.stalemated.unrestrictedench.enchantment.EnchantmentIds;
 import com.stalemated.unrestrictedench.model.EnchantmentRules;
 import net.minecraft.Util;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -18,6 +18,11 @@ import java.util.TreeSet;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
+//? if >=1.21 {
+/*import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+*///?}
 
 public final class UnrestrictedEnchantingConfigScreen {
     private static final String RULES = "rules";
@@ -66,6 +71,12 @@ public final class UnrestrictedEnchantingConfigScreen {
     }
 
     private static Collection<String> registeredEnchantmentIds() {
-        return BuiltInRegistries.ENCHANTMENT.keySet().stream().map(ResourceLocation::toString).toList();
+        //? if <1.21 {
+        Collection<ResourceLocation> ids = EnchantmentIds.builtIn();
+        //?} else {
+        /*ClientLevel level = Minecraft.getInstance().level;
+        Collection<ResourceLocation> ids = level == null ? List.of() : EnchantmentIds.registeredIn(level.registryAccess());
+        *///?}
+        return ids.stream().map(ResourceLocation::toString).toList();
     }
 }

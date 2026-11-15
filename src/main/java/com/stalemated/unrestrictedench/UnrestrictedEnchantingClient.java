@@ -3,9 +3,11 @@ package com.stalemated.unrestrictedench;
 import com.stalemated.lib.client.SLibConfigScreens;
 import com.stalemated.unrestrictedench.config.UnrestrictedEnchantingConfigScreen;
 
-//? if fabric {
-import com.stalemated.unrestrictedench.config.UnrestrictedEnchantingConfigRegistry;
+//? if fabric
 import net.fabricmc.api.ClientModInitializer;
+//? if fabric && <1.21 {
+import com.stalemated.unrestrictedench.config.UnrestrictedEnchantingConfigRegistry;
+import com.stalemated.unrestrictedench.enchantment.EnchantmentIds;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 //?}
 
@@ -16,7 +18,8 @@ implements ClientModInitializer
     @Override
     public void onInitializeClient() {
         init();
-        ClientLifecycleEvents.CLIENT_STARTED.register(client -> UnrestrictedEnchantingConfigRegistry.addRegisteredEnchantments());
+        //? if <1.21
+        ClientLifecycleEvents.CLIENT_STARTED.register(client -> UnrestrictedEnchantingConfigRegistry.addRegisteredEnchantments(EnchantmentIds.builtIn()));
     }
     //?} else {
     /*private UnrestrictedEnchantingClient() {

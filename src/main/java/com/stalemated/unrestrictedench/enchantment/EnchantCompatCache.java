@@ -3,9 +3,7 @@ package com.stalemated.unrestrictedench.enchantment;
 import com.stalemated.lib.util.ResourceIds;
 import com.stalemated.unrestrictedench.config.UnrestrictedEnchantingConfig;
 import com.stalemated.unrestrictedench.model.EnchantmentRules;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,18 +14,15 @@ public class EnchantCompatCache {
     private static final Map<ResourceLocation, Set<ResourceLocation>> allowedGraph = new HashMap<>();
     private static final Map<ResourceLocation, Set<ResourceLocation>> restrictedGraph = new HashMap<>();
 
-    public static boolean areAllowed(Enchantment a, Enchantment b) {
-        return checkGraph(allowedGraph, a, b);
+    public static boolean areAllowed(ResourceLocation idA, ResourceLocation idB) {
+        return checkGraph(allowedGraph, idA, idB);
     }
 
-    public static boolean areRestricted(Enchantment a, Enchantment b) {
-        return checkGraph(restrictedGraph, a, b);
+    public static boolean areRestricted(ResourceLocation idA, ResourceLocation idB) {
+        return checkGraph(restrictedGraph, idA, idB);
     }
 
-    private static boolean checkGraph(Map<ResourceLocation, Set<ResourceLocation>> graph, Enchantment a, Enchantment b) {
-        ResourceLocation idA = BuiltInRegistries.ENCHANTMENT.getKey(a);
-        ResourceLocation idB = BuiltInRegistries.ENCHANTMENT.getKey(b);
-
+    private static boolean checkGraph(Map<ResourceLocation, Set<ResourceLocation>> graph, ResourceLocation idA, ResourceLocation idB) {
         if (idA == null || idB == null) return false;
 
         Set<ResourceLocation> setA = graph.get(idA);
