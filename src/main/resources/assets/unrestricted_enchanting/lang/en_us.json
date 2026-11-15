@@ -1,0 +1,8 @@
+{
+    "unrestricted_enchanting.config.title": "Unrestricted Enchanting",
+    "unrestricted_enchanting.category.general": "General",
+    "unrestricted_enchanting.option.enabled": "Enabled",
+    "unrestricted_enchanting.option.enabled.desc": "Turns the mod on or off.",
+    "unrestricted_enchanting.option.repeats": "Repeats",
+    "unrestricted_enchanting.option.repeats.desc": "How many times the effect repeats."
+}
