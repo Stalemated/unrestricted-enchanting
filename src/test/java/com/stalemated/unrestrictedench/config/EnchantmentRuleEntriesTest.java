@@ -15,7 +15,7 @@ class EnchantmentRuleEntriesTest {
     @Test
     void registeredEnchantmentsGetEmptyRulesAndExistingRulesStay() {
         EnchantmentRules mending = new EnchantmentRules();
-        mending.allowed = List.of("minecraft:infinity");
+        mending.allowed = List.of(ResourceIds.parse("minecraft:infinity"));
         UnrestrictedEnchantingConfig config = new UnrestrictedEnchantingConfig();
         config.rules = new HashMap<>(Map.of("minecraft:mending", mending));
 

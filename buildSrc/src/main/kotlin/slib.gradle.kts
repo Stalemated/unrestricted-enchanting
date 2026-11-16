@@ -25,6 +25,10 @@ val loaderConfiguration = requireNotNull(loaderConfigurations[loader]) {
 }
 val slib = if (slibLocal) "com.stalemated.lib:s-lib-$loader:$slibVersion+$minecraft" else "maven.modrinth:s-lib:$slibVersion+$minecraft-$loader"
 
+val slibTestLibraries: Map<String, () -> String> = mapOf(
+    "forge" to { "blue.endless:jankson:${sc.properties.get<String>("deps.jankson")}" },
+)
+
 repositories {
     exclusiveContent {
         forRepository { maven("https://api.modrinth.com/maven") { name = "Modrinth" } }
@@ -60,4 +64,6 @@ dependencies {
         add(loaderConfiguration.runtimeOnly, yacl)
         devMods[loader]?.let { add(loaderConfiguration.runtimeOnly, it()) { isTransitive = false } }
     }
+
+    slibTestLibraries[loader]?.let { add("testRuntimeOnly", it()) }
 }

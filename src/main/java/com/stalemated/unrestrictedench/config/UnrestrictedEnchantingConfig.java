@@ -17,7 +17,8 @@ public class UnrestrictedEnchantingConfig {
       - allowed: Forced COMPATIBLE with this enchantment (overrides vanilla restrictions).
       - restricted: Forced INCOMPATIBLE (takes absolute precedence over vanilla and allowed).
     Notes:
-      - All entries with invalid registry IDs get ignored.
+      - Invalid IDs in "allowed" and "restricted" are removed when this file loads (a backup is saved first).
+      - Rules under an invalid ID are ignored, and so are IDs of enchantments that are not installed.
       - Rules are bidirectional: adding "minecraft:infinity" to "minecraft:mending"
         automatically makes "minecraft:mending" compatible with "minecraft:infinity".
     """)

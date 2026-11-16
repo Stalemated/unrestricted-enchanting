@@ -1,9 +1,11 @@
 package com.stalemated.unrestrictedench.config;
 
+import net.minecraft.resources.ResourceLocation;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class EnchantmentRules {
-    public List<String> allowed = new ArrayList<>();
-    public List<String> restricted = new ArrayList<>();
+    public List<ResourceLocation> allowed = new ArrayList<>();
+    public List<ResourceLocation> restricted = new ArrayList<>();
 }

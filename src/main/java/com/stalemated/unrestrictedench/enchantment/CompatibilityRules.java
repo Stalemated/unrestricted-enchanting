@@ -1,6 +1,6 @@
 package com.stalemated.unrestrictedench.enchantment;
 
-import com.stalemated.lib.util.ResourceIds;
+import com.stalemated.unrestrictedench.UnrestrictedEnchanting;
 import com.stalemated.unrestrictedench.config.EnchantmentRules;
 import net.minecraft.resources.ResourceLocation;
 
@@ -27,7 +27,13 @@ public final class CompatibilityRules {
         Map<ResourceLocation, Set<ResourceLocation>> allowedPairs = new HashMap<>();
         Map<ResourceLocation, Set<ResourceLocation>> restrictedPairs = new HashMap<>();
         rulesByEnchantment.forEach((enchantment, rules) -> {
-            ResourceLocation enchantmentId = ResourceIds.parse(enchantment);
+            ResourceLocation enchantmentId = ResourceLocation.tryParse(enchantment);
+            if (enchantmentId == null) {
+                UnrestrictedEnchanting.LOGGER.warn("Skipping the rules of \"{}\": it is not a valid enchantment id", enchantment);
+                return;
+            }
+            if (rules == null) return;
+
             pair(allowedPairs, enchantmentId, rules.allowed);
             pair(restrictedPairs, enchantmentId, rules.restricted);
         });
@@ -40,11 +46,12 @@ public final class CompatibilityRules {
         return compatibleInVanilla || arePaired(allowedPairs, first, second);
     }
 
-    private static void pair(Map<ResourceLocation, Set<ResourceLocation>> pairs, ResourceLocation enchantmentId, List<String> others) {
+    private static void pair(Map<ResourceLocation, Set<ResourceLocation>> pairs, ResourceLocation enchantmentId, List<ResourceLocation> others) {
         if (others == null) return;
 
-        for (String other : others) {
-            ResourceLocation otherId = ResourceIds.parse(other);
+        for (ResourceLocation otherId : others) {
+            if (otherId == null) continue;
+
             pairs.computeIfAbsent(enchantmentId, id -> new HashSet<>()).add(otherId);
             pairs.computeIfAbsent(otherId, id -> new HashSet<>()).add(enchantmentId);
         }

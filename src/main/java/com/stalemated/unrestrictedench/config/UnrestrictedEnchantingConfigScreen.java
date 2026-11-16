@@ -45,10 +45,10 @@ public final class UnrestrictedEnchantingConfigScreen {
     private static NestListBinding<EnchantmentRules> ruleLists(
             Supplier<Collection<String>> ruleKeys,
             String listKey,
-            Function<EnchantmentRules, List<String>> getter,
-            BiConsumer<EnchantmentRules, List<String>> setter
+            Function<EnchantmentRules, List<ResourceLocation>> getter,
+            BiConsumer<EnchantmentRules, List<ResourceLocation>> setter
     ) {
-        return NestListBinding.of(getter, setter)
+        return NestListBinding.of(ResourceLocation.class, getter, setter)
                 .withKeys(ruleKeys, EnchantmentRules::new)
                 .withEntryNames(UnrestrictedEnchantingConfigScreen::enchantmentName)
                 .withDescription(Component.translatable("unrestricted_enchanting.option." + listKey + ".desc"));
