@@ -34,10 +34,17 @@ public final class CompatibilityRules {
             }
             if (rules == null) return;
 
-            pair(allowedPairs, enchantmentId, rules.allowed);
+            pair(allowedPairs, enchantmentId, withoutItself(enchantmentId, rules.allowed));
             pair(restrictedPairs, enchantmentId, rules.restricted);
         });
         return new CompatibilityRules(immutableCopy(allowedPairs), immutableCopy(restrictedPairs));
+    }
+
+    private static List<ResourceLocation> withoutItself(ResourceLocation enchantmentId, List<ResourceLocation> allowed) {
+        if (allowed == null || !allowed.contains(enchantmentId)) return allowed;
+
+        UnrestrictedEnchanting.LOGGER.warn("Ignoring {} in its own allowed list: an enchantment can never be combined with itself", enchantmentId);
+        return allowed.stream().filter(id -> !enchantmentId.equals(id)).toList();
     }
 
     public boolean areCompatible(ResourceLocation first, ResourceLocation second, boolean compatibleInVanilla) {

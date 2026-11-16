@@ -62,6 +62,16 @@ class CompatibilityRulesTest {
     }
 
     @Test
+    void anEnchantmentInItsOwnAllowedListStaysIncompatibleWithItself() {
+        EnchantmentRules sharpness = new EnchantmentRules();
+        sharpness.allowed = List.of(SHARPNESS, LOOTING);
+        CompatibilityRules rules = CompatibilityRules.from(Map.of("minecraft:sharpness", sharpness));
+
+        assertFalse(rules.areCompatible(SHARPNESS, SHARPNESS, false));
+        assertTrue(rules.areCompatible(SHARPNESS, LOOTING, false));
+    }
+
+    @Test
     void rulesUnderAKeyThatIsNotAnIdAreSkippedAndTheOthersApply() {
         CompatibilityRules rules = CompatibilityRules.from(Map.of(
                 "Not An Id", restricting(INFINITY),
