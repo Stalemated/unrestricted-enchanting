@@ -23,6 +23,10 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 *///?}
+//? if neoforge && <1.21 {
+/*import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
+*///?}
 
 //? if forge || neoforge {
 /*@Mod(UnrestrictedEnchanting.MOD_ID)
@@ -47,6 +51,13 @@ implements ModInitializer
         FMLJavaModLoadingContext.get().getModEventBus().addListener(UnrestrictedEnchanting::onLoadComplete);
         if (FMLEnvironment.dist == Dist.CLIENT) UnrestrictedEnchantingClient.init();
     }
+    *///?} elif neoforge && <1.21 {
+    /*public UnrestrictedEnchanting(IEventBus modBus, Dist dist) {
+        init();
+        NeoForge.EVENT_BUS.addListener(UnrestrictedEnchanting::onServerStarting);
+        modBus.addListener(UnrestrictedEnchanting::onLoadComplete);
+        if (dist == Dist.CLIENT) UnrestrictedEnchantingClient.init();
+    }
     *///?} elif neoforge {
     /*public UnrestrictedEnchanting(Dist dist) {
         init();
@@ -69,7 +80,7 @@ implements ModInitializer
     }
     *///?}
 
-    //? if forge {
+    //? if !fabric && <1.21 {
     /*private static void onLoadComplete(FMLLoadCompleteEvent event) {
         event.enqueueWork(() -> UnrestrictedEnchantingConfigRegistry.addRegisteredEnchantments(EnchantmentIds.builtIn()));
     }

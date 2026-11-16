@@ -37,9 +37,17 @@ public final class UnrestrictedEnchantingConfigScreen {
         Supplier<Collection<String>> ruleKeys = () -> sortedRuleKeys(config, enchantmentIds);
         return YaclScreenBuilder.create(parent, Component.translatable("unrestricted_enchanting.config.title"), UnrestrictedEnchanting.MOD_ID)
                 .category(config, "allowed", tab -> tab.nestedMapLists(RULES,
-                        ruleLists(ruleKeys, "allowed", rules -> rules.allowed, (rules, ids) -> rules.allowed = ids)))
+                        ruleLists(ruleKeys, "allowed",
+                                rules -> rules.allowed,
+                                (rules, ids) -> rules.allowed = ids
+                        )
+                ))
                 .category(config, "restricted", tab -> tab.nestedMapLists(RULES,
-                        ruleLists(ruleKeys, "restricted", rules -> rules.restricted, (rules, ids) -> rules.restricted = ids)));
+                        ruleLists(ruleKeys, "restricted",
+                                rules -> rules.restricted,
+                                (rules, ids) -> rules.restricted = ids
+                        )
+                ));
     }
 
     private static NestListBinding<EnchantmentRules> ruleLists(
