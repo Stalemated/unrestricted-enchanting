@@ -23,6 +23,6 @@ public final class UnrestrictedEnchantingConfigRegistry {
     }
 
     public static void addRegisteredEnchantments(Collection<ResourceLocation> enchantmentIds) {
-        CONFIG.modify(config -> EnchantmentRuleEntries.addMissing(config, enchantmentIds));
+        EnchantmentRuleEntries.addMissing(CONFIG, enchantmentIds);
     }
 }
