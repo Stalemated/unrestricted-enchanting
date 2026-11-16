@@ -18,6 +18,8 @@ stonecutter parameters {
     replacements {
         string(current.parsed >= "1.21.11") {
             replace("ResourceLocation", "Identifier")
+            replace("ResourceKey::location", "ResourceKey::identifier")
+            replace("import net.minecraft.Util;", "import net.minecraft.util.Util;")
         }
 
         string(current.parsed >= "26.1") {
