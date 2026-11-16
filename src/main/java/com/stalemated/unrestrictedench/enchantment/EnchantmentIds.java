@@ -33,6 +33,10 @@ public final class EnchantmentIds {
     *///?}
 
     public static Set<ResourceLocation> registeredIn(RegistryAccess registries) {
+        //? if <1.21.2 {
         return registries.registryOrThrow(Registries.ENCHANTMENT).keySet();
+        //?} else {
+        /*return registries.lookupOrThrow(Registries.ENCHANTMENT).keySet();
+        *///?}
     }
 }
